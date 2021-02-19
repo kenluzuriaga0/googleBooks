@@ -24,15 +24,15 @@ public class Enlistar_Books {
     public void verLibros() throws IOException {
         Libro libro = new Libro();
 
-//         Scanner scn = new Scanner(System.in);
-//         System.out.println("Ingrese un titulo");
-//         String titulo = scn.nextLine();
-//         System.out.println("Ingrese un autor");
-//         String autor = scn.nextLine();
+         Scanner scn = new Scanner(System.in);
+         System.out.println("Ingrese un titulo");
+         String titulo = scn.nextLine();
+         //System.out.println("Ingrese un autor");
+         //String autor = scn.nextLine();
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("https://www.googleapis.com/books/v1/volumes?q=intitle:harry potter&maxResults=10&key=" + libro.getApi_key() + "&fields=items.volumeInfo(title,authors,publisher,publishedDate,description,pageCount,categories,averageRating,imageLinks.smallThumbnail)&")
+                .url("https://www.googleapis.com/books/v1/volumes?q=intitle:+"+titulo+"&maxResults=10&key=" + libro.getApi_key() + "&fields=items.volumeInfo(title,authors,publisher,publishedDate,description,pageCount,categories,averageRating,imageLinks.smallThumbnail)&")
                 .method("GET", null)
                 .build();
         
@@ -48,7 +48,7 @@ public class Enlistar_Books {
         
 
         Gson gson = new Gson();
-        System.out.println(elJson);
+        //System.out.println(elJson);
 
 
         //Crear un json y parsearlo desde el string
@@ -61,7 +61,7 @@ public class Enlistar_Books {
         }.getType();
         ArrayList<Items> arrayDeJson = gson.fromJson(String.valueOf(array), listType);
 
-        //imprimir algunos datos de los libros solicitados
+        //imprimir algunos datos de los libros solicitados (Titulo y autor)
         for (Items arr : arrayDeJson) {
             System.out.println(arr.getVolumeInfo().getTitle() + " .- " + arr.getVolumeInfo().getAutorNombre(0));
         }

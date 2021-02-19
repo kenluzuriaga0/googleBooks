@@ -31,7 +31,7 @@ public class Inicio_books {
         //1. vamos a traer los datos de la API (Esto se copia de POSTMAN)
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://www.googleapis.com/books/v1/volumes?q=harry potter+inauthor:king&maxResults=1&key="+libro.getApi_key())
+                .url("https://www.googleapis.com/books/v1/volumes?q=carrie+inauthor:king&maxResults=1&key="+libro.getApi_key())
                 .get().build();
         Response response = client.newCall(request).execute();
         
@@ -62,9 +62,12 @@ public class Inicio_books {
     
     public static void main(String[] args) throws IOException {
 //       Inicio_books lib = new Inicio_books();
-//        lib.verLibros();
-//        Enlistar_Books lib2 = new Enlistar_Books();
-//        lib2.verLibros();
+//        lib.verLibros(); //ver el JSON entero
+        
+        Enlistar_Books lib2 = new Enlistar_Books();
+        lib2.verLibros();
+        lib2=null;
+
     }
     
     
